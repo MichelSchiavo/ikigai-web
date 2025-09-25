@@ -9,12 +9,13 @@ import Onis from './Onis';
 import Lore from './Lore';
 import Footer from './Footer';
 import CustomCursor from './CustomCursor';
+import  AOS from 'aos';
 
 export default function ClientComponents() {
   useEffect(() => {
     const initializeAOS = () => {
-      if (typeof window !== 'undefined' && window.AOS) {
-        window.AOS.init({
+      if (typeof window !== 'undefined') {
+        AOS.init({
           once: true,
           offset: 50,
         });

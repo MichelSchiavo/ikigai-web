@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Shippori_Mincho } from "next/font/google";
+import ExternalScripts from "@/components/ExternalScripts";
 import "./globals.css";
 
 const shipporiMincho = Shippori_Mincho({
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className="scroll-smooth">
       <body className={`${shipporiMincho.variable} antialiased`}>
+        <ExternalScripts />
         {children}
       </body>
     </html>

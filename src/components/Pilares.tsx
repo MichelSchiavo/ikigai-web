@@ -2,12 +2,17 @@
 
 import { useEffect } from 'react';
 import { breathingTechniques } from '@/data';
+import { Swiper } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function Pilares() {
   useEffect(() => {
     const initializeSwiper = () => {
-      if (typeof window !== 'undefined' && window.Swiper) {
-        new window.Swiper('.swiper', {
+      if (typeof window !== 'undefined') {
+        new Swiper('.swiper', {
           loop: true,
           slidesPerView: 1,
           spaceBetween: 30,

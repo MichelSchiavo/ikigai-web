@@ -1,14 +1,16 @@
 'use client';
 
 import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import Typed from 'typed.js';
 
 export default function Hero() {
   useEffect(() => {
     // Verificar se as bibliotecas foram carregadas
     const initializeAnimations = () => {
-      if (typeof window !== 'undefined' && window.gsap && window.Typed) {
+      if (typeof window !== 'undefined') {
         // Typed.js para o título da Hero Section
-        const typed = new window.Typed('#hero-typed-text', {
+        const typed = new Typed('#hero-typed-text', {
           strings: ['Ikigai.', 'Propósito.', 'Destino.'],
           typeSpeed: 70,
           backSpeed: 50,
@@ -17,7 +19,7 @@ export default function Hero() {
         });
 
         // GSAP animations
-        const tl = window.gsap.timeline({ defaults: { ease: 'power3.out' } });
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
         tl.to('#hero-title', { opacity: 1, y: -20, duration: 1, delay: 0.5 });
         tl.to('#hero-subtitle', { opacity: 1, y: -20, duration: 1 }, "-=0.7");
         tl.to('#hero-btn', { opacity: 1, y: -20, duration: 1 }, "-=0.7");
