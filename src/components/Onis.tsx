@@ -57,10 +57,9 @@ export default function Onis() {
 
   return (
     <section id="onis" className="py-20 md:py-32">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
-          A Ameaça que Emerge da <span className="text-[#A62639]">Noite</span>
-        </h2>
+      <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
+        A Ameaça que Emerge da <span className="text-[#A62639]">Noite</span>
+      </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
           {onis.map((oni, index) => (
             <div 
@@ -88,7 +87,6 @@ export default function Onis() {
             </div>
           ))}
         </div>
-      </div>
     </section>
   );
 }

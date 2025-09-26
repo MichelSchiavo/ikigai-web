@@ -8,12 +8,46 @@
   cursor: none !important;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: var(--font-shippori-mincho), serif;
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
   cursor: none !important; /* Remove o cursor padrão */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: radial-gradient(ellipse at bottom, #4d1a24 0%, #100a0a 60%);
+  min-height: 100vh;
+}
+
+/* Background sutil para melhorar a leitura do conteúdo */
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom, 
+    rgba(0, 0, 0, 0.1) 0%, 
+    rgba(0, 0, 0, 0.05) 50%, 
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Remove cursor pointer de todos os elementos */
@@ -26,13 +60,19 @@ a, button, .swiper-slide {
 }
 
 .particle-bg {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background: radial-gradient(ellipse at bottom, #4d1a24 0%, #100a0a 60%);
+  z-index: 1;
+  background: radial-gradient(
+    ellipse at center, 
+    rgba(77, 26, 36, 0.15) 0%, 
+    rgba(77, 26, 36, 0.08) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
 }
 
 ::-webkit-scrollbar {
@@ -291,4 +331,29 @@ a, button, .swiper-slide {
   padding: 1rem;
   background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
   transform: translateZ(50px);
+}
+
+/* Header navigation styles */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #A62639;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active::after {
+  width: 100%;
 }

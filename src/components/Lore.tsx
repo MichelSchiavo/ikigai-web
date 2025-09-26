@@ -1,7 +1,7 @@
 export default function Lore() {
   return (
-    <section id="lore" className="py-20 md:py-32 bg-black/20">
-      <div className="container mx-auto px-6 text-center">
+    <section id="lore" className="py-20 md:py-32">
+      <div className="text-center">
         <h2 className="text-4xl font-bold mb-6" data-aos="fade-up">
           A Lenda do Nosso <span className="text-[#A62639]">Mundo</span>
         </h2>

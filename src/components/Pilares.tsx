@@ -25,10 +25,9 @@ export default function Pilares() {
   };
 
   return (
-    <section id="pilares" className="py-20 md:py-32 bg-black/20">
-      <div className="container mx-auto px-6">
-        <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
-          Os Pilares e suas <span className="text-[#A62639]">Respirações</span>
+    <section id="pilares" className="py-20 md:py-32">
+      <h2 className="text-4xl font-bold text-center mb-16" data-aos="fade-up">
+        Os Pilares e suas <span className="text-[#A62639]">Respirações</span>
         </h2>
         
         <div className="relative">
@@ -38,7 +37,7 @@ export default function Pilares() {
                 className="swiper-button-prev premium-nav-button group"
                 onClick={() => swiperRef.current?.slidePrev()}
               >
-                <i className="fas fa-chevron-left"></i>
+                <i className="fas fa-chevron-left text-[#A62639] group-hover:text-white transition-colors"></i>
               </button>
               
               <div className="flex items-center space-x-3">
@@ -56,7 +55,7 @@ export default function Pilares() {
                 className="swiper-button-next premium-nav-button group"
                 onClick={() => swiperRef.current?.slideNext()}
               >
-                <i className="fas fa-chevron-right"></i>
+                <i className="fas fa-chevron-right text-[#A62639] group-hover:text-white transition-colors"></i>
               </button>
             </div>
           </div>
@@ -103,7 +102,6 @@ export default function Pilares() {
             <div className="swiper-pagination mt-8 !relative"></div>
           </div>
         </div>
-      </div>
     </section>
   );
 }

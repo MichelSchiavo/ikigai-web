@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Shippori_Mincho } from "next/font/google";
-import ExternalScripts from "@/components/ExternalScripts";
 import "./globals.css";
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import CustomCursor from '@/components/CustomCursor';
+import 'aos/dist/aos.css';
 
 const shipporiMincho = Shippori_Mincho({
   weight: ['400', '700', '800'],
@@ -36,10 +39,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className="scroll-smooth">
-      <body className={`${shipporiMincho.variable} antialiased`}>
-        <ExternalScripts />
-        {children}
+    <html lang="pt-br" className="scroll-smooth h-full">
+      <body className={`${shipporiMincho.variable} antialiased h-full flex flex-col`}>
+        <CustomCursor />
+        <Header />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

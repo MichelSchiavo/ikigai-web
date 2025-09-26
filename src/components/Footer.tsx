@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-black/30 py-12">
+    <footer className="py-12">
       <div className="container mx-auto px-6 text-center text-gray-500">
         <div className="flex justify-center space-x-6 mb-6">
           <a href="#" className="text-2xl hover:text-[#A62639] transition">

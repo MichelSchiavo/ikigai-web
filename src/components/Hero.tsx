@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Link from 'next/link';
 import { gsap } from 'gsap';
 import Typed from 'typed.js';
 
@@ -57,13 +58,13 @@ export default function Hero() {
         >
           Em um mundo de exilados, encontre sua razão para lutar. Domine sua respiração e lute pela sua sobrevivência.
         </p>
-        <a 
-          href="#pilares" 
+        <Link 
+          href="/pilares" 
           id="hero-btn" 
           className="sword-btn inline-block mt-10 py-3 px-8 text-xl font-bold uppercase tracking-widest opacity-0"
         >
           Descubra seu poder
-        </a>
+        </Link>
       </div>
     </section>
   );
