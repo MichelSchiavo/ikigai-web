@@ -237,6 +237,12 @@ a, button, .swiper-slide {
   transform: scale(1.2);
 }
 
+/* Classe específica para o swiper dos hashiras */
+.hashiras-swiper .swiper-pagination {
+  position: relative !important;
+  margin-top: 2rem !important;
+}
+
 .oni-card-wrapper {
   position: relative;
 }

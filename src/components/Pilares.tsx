@@ -1,44 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useRef } from 'react';
 import { breathingTechniques } from '@/data';
-import { Swiper } from 'swiper';
+import { Swiper as SwiperType } from 'swiper/types';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function Pilares() {
-  useEffect(() => {
-    const initializeSwiper = () => {
-      if (typeof window !== 'undefined') {
-        new Swiper('.swiper', {
-          loop: true,
-          slidesPerView: 1,
-          spaceBetween: 30,
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          breakpoints: {
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            }
-          }
-        });
-      }
-    };
-
-    const timer = setTimeout(initializeSwiper, 100);
-    return () => clearTimeout(timer);
-  }, []);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const getColorClasses = (color: string) => {
     const colorMap: { [key: string]: string } = {
@@ -61,8 +34,11 @@ export default function Pilares() {
         <div className="relative">
           <div className="flex justify-center mb-8">
             <div className="flex items-center space-x-6">
-              <button className="swiper-button-prev premium-nav-button group">
-                <i className="fas fa-chevron-left absolute"></i>
+              <button 
+                className="swiper-button-prev premium-nav-button group"
+                onClick={() => swiperRef.current?.slidePrev()}
+              >
+                <i className="fas fa-chevron-left"></i>
               </button>
               
               <div className="flex items-center space-x-3">
@@ -76,18 +52,40 @@ export default function Pilares() {
                 <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-[#A62639]"></div>
               </div>
               
-              <button className="swiper-button-next premium-nav-button group">
-                <i className="fas fa-chevron-right absolute"></i>
+              <button 
+                className="swiper-button-next premium-nav-button group"
+                onClick={() => swiperRef.current?.slideNext()}
+              >
+                <i className="fas fa-chevron-right"></i>
               </button>
             </div>
           </div>
           
-          <div className="swiper" data-aos="zoom-in" data-aos-duration="1000">
-            <div className="swiper-wrapper">
+          <div data-aos="zoom-in" data-aos-duration="1000">
+            <Swiper
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              modules={[Navigation, Pagination]}
+              loop={true}
+              slidesPerView={1}
+              spaceBetween={30}
+              pagination={{
+                el: '.swiper-pagination',
+                clickable: true,
+              }}
+              breakpoints={{
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                }
+              }}
+              className="hashiras-swiper"
+            >
               {breathingTechniques.map((technique) => {
                 const colorClasses = getColorClasses(technique.color);
                 return (
-                  <div key={technique.id} className="swiper-slide">
+                  <SwiperSlide key={technique.id}>
                     <div className={`swiper-slide-content bg-[#1A1A1A] rounded-lg p-8 text-center border-b-4 ${colorClasses.split(' ')[0]}`}>
                       <div className="flex-grow">
                         <i className={`${technique.icon} text-5xl ${colorClasses.split(' ')[1]} mb-4`}></i>
@@ -98,10 +96,10 @@ export default function Pilares() {
                         {technique.pillar ? `Pilar: ${technique.pillar}` : `Usuário Notável: ${technique.user}`}
                       </p>
                     </div>
-                  </div>
+                  </SwiperSlide>
                 );
               })}
-            </div>
+            </Swiper>
             <div className="swiper-pagination mt-8 !relative"></div>
           </div>
         </div>

@@ -3,55 +3,55 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { onis } from '@/data';
+import { gsap } from 'gsap';
 
 export default function Onis() {
   useEffect(() => {
     const initializeOniCards = () => {
-      if (typeof window !== 'undefined' && window.gsap) {
-        const oniCardWrappers = document.querySelectorAll('.oni-card-wrapper');
-        
-        oniCardWrappers.forEach((wrapper) => {
-          const card = wrapper.querySelector('.oni-card');
-          const glow = card?.querySelector('.oni-card-glow') as HTMLElement;
+      const oniCardWrappers = document.querySelectorAll('.oni-card-wrapper');
+      
+      oniCardWrappers.forEach((wrapper) => {
+        const card = wrapper.querySelector('.oni-card');
+        const glow = card?.querySelector('.oni-card-glow') as HTMLElement;
 
-          wrapper.addEventListener('mousemove', (e: Event) => {
-            const mouseEvent = e as MouseEvent;
-            const rect = wrapper.getBoundingClientRect();
-            const x = mouseEvent.clientX - rect.left;
-            const y = mouseEvent.clientY - rect.top;
-            const width = rect.width;
-            const height = rect.height;
+        wrapper.addEventListener('mousemove', (e: Event) => {
+          const mouseEvent = e as MouseEvent;
+          const rect = wrapper.getBoundingClientRect();
+          const x = mouseEvent.clientX - rect.left;
+          const y = mouseEvent.clientY - rect.top;
+          const width = rect.width;
+          const height = rect.height;
 
-            const rotateX = window.gsap.utils.mapRange(0, height, 15, -15, y);
-            const rotateY = window.gsap.utils.mapRange(0, width, -15, 15, x);
+          const rotateX = gsap.utils.mapRange(0, height, 15, -15, y);
+          const rotateY = gsap.utils.mapRange(0, width, -15, 15, x);
 
-            if (glow) {
-              glow.style.setProperty('--x', `${(x / width) * 100}%`);
-              glow.style.setProperty('--y', `${(y / height) * 100}%`);
-            }
+          if (glow) {
+            glow.style.setProperty('--x', `${(x / width) * 100}%`);
+            glow.style.setProperty('--y', `${(y / height) * 100}%`);
+          }
 
-            window.gsap.to(card, {
-              rotationX: rotateX,
-              rotationY: rotateY,
-              transformPerspective: 1000,
-              ease: 'power1.out',
-              duration: 0.5
-            });
-          });
-
-          wrapper.addEventListener('mouseleave', () => {
-            window.gsap.to(card, {
-              rotationX: 0,
-              rotationY: 0,
-              ease: 'power1.out',
-              duration: 1
-            });
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 1000,
+            ease: 'power1.out',
+            duration: 0.5
           });
         });
-      }
+
+        wrapper.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            ease: 'power1.out',
+            duration: 1
+          });
+        });
+      });
     };
 
-    const timer = setTimeout(initializeOniCards, 100);
+    // Aguarda a renderização dos elementos
+    const timer = setTimeout(initializeOniCards, 500);
     return () => clearTimeout(timer);
   }, []);
 
